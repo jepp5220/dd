@@ -1,0 +1,160 @@
+Public Class Form1
+    Dim dato As String
+    Dim datolong As String
+    Dim DatoCurrent As String
+    Dim datocurrentlong As String
+    Dim ValgteDatoLong As String
+    Dim DNMCurrent As String
+    Dim B2MSG As String
+    Dim DNMvalgt As String
+
+    Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        DNMCurrent = DateTime.Now.Month
+        DNMvalgt = DateTimePicker1.Value.Month
+        ' llllllllllllllllllllllllllllllllllllllllll1
+        dato = DateTimePicker1.Value.DayOfWeek
+        'DayOfWeek referer til en value på 1-7, man - søn.
+        datolong = DateTimePicker1.Value.Date
+        'Value.Date referer til en dato "dd/mm/yy"
+        DatoCurrent = DateTime.Now.DayOfWeek
+        '^ Når knappen klikkes hældes dato'er over i disse variabler'
+        datocurrentlong = DateTime.Now.Date
+        ValgteDatoLong = DateTimePicker1.Value.Date
+        'sssssssssssssssssssss
+        Button2.Enabled = True
+        Label9.Text = ValgteDatoLong
+        Label10.Text = DNMvalgt
+        Label1.Text = dato
+        Label8.Text = DNMCurrent
+
+
+
+        If dato = 1 Then
+            Label1.Visible = True
+            Label4.Visible = True
+            Label9.Visible = True
+            Label11.Visible = True
+            Label1.Text = "Mandag"
+        ElseIf dato = 2 Then
+            Label1.Visible = True
+            Label4.Visible = True
+            Label9.Visible = True
+            Label11.Visible = True
+            Label1.Text = "Tirsdag"
+        ElseIf dato = 3 Then
+            Label1.Visible = True
+            Label4.Visible = True
+            Label9.Visible = True
+            Label11.Visible = True
+            Label1.Text = "Onsdag"
+        ElseIf dato = 4 Then
+            Label1.Visible = True
+            Label4.Visible = True
+            Label9.Visible = True
+            Label11.Visible = True
+            Label1.Text = "Torsdag"
+        ElseIf dato = 5 Then
+            Label1.Visible = True
+            Label4.Visible = True
+            Label9.Visible = True
+            Label11.Visible = True
+            Label1.Text = "Fredag"
+        ElseIf dato = 6 Then
+            Label1.Visible = False
+            Label1.Text = "Lørdag"
+        ElseIf dato = 0 Then
+            Label1.Visible = False
+            Label1.Text = "Søndag"
+        End If
+
+        If DNMvalgt < DNMCurrent Then
+            Label1.Visible = False
+            Label4.Visible = False
+            Label9.Visible = False
+            Label11.Visible = False
+            MsgBox("Du kan ikke bestille for den valgte måned", vbOKOnly, "Frokostbestilling")
+            GoTo 3
+        End If
+        If ValgteDatoLong = datocurrentlong Then
+            Button2.Enabled = False
+            Label1.Visible = False
+            Label4.Visible = False
+            Label9.Visible = False
+            Label11.Visible = False
+            MsgBox("Du kan ikke bestille for i dag! Husk at bestille i god tid!", vbOKOnly, "Frokost")
+            GoTo 3
+        End If
+        If ValgteDatoLong < datocurrentlong Then
+            Button2.Enabled = False
+            Label1.Visible = False
+            Label4.Visible = False
+            Label9.Visible = False
+            Label11.Visible = False
+            MsgBox("Du lidt sent ude ven... Husk at bestille i god tid!", vbOKOnly, "Frokostbestilling")
+
+            GoTo 3
+        End If
+        If dato = datocurrentlong Then
+            Button2.Enabled = False
+            Label1.Visible = False
+            Label4.Visible = False
+            Label9.Visible = False
+            Label11.Visible = False
+            MsgBox("Du kan ikke bestille for i dag. Husk at bestille i god tid!", vbOKOnly, "Frokostbestilling")
+
+            GoTo 3
+        End If
+        If dato = 6 Then
+            Button2.Enabled = False
+            Label1.Visible = False
+            Label4.Visible = False
+            Label9.Visible = False
+            Label11.Visible = False
+            MsgBox("Du kan ikke bestille for weekenden", vbOKOnly, "Frokostbestilling")
+        ElseIf dato = 0 Then
+            Button2.Enabled = False
+            Label1.Visible = False
+            Label4.Visible = False
+            Label9.Visible = False
+            Label11.Visible = False
+            MsgBox("Du kan ikke bestille for weekenden", vbOKOnly, "Frokostbestilling")
+
+        End If
+3:
+    End Sub
+
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+4:
+
+        If dato = 1 Or 2 Or 3 Or 4 Or 5 Then
+            B2MSG = MsgBox("Du bestiller for " + Label1.Text & " " & datolong, vbOKCancel, "Frokostbestilling")
+        End If
+
+        If B2MSG = vbCancel Then
+            Close()
+            Label1.Visible = False
+            Label4.Visible = False
+            Label9.Visible = False
+            Label11.Visible = False
+        ElseIf B2MSG = vbOK Then
+            Button2.Visible = False
+            Button1.Visible = False
+            DateTimePicker1.Visible = False
+            Label1.Visible = False
+            Label3.Visible = False
+            Label4.Visible = False
+            Label5.Visible = False
+            Label6.Visible = False
+            Label7.Visible = False
+            Label8.Visible = False
+            Label9.Visible = False
+            Label10.Visible = False
+            Label11.Visible = False
+        End If
+    End Sub
+End Class
